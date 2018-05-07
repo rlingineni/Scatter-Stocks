@@ -1,0 +1,20 @@
+{
+  "name": "Bombshell-GUI",
+  "authors": [
+    "rlingineni <rlingineni@live.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mustache.js": "mustache#^2.3.0"
+  }
+}

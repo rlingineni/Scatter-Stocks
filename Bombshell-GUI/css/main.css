@@ -1,0 +1,47 @@
+.ui.borderless.huge.menu {
+    background-color: #f8f8f8;
+  }
+
+  .ui.borderless.huge.menu .header.item {
+    font-size: 1.2em;
+  }
+
+  .ui.vertical.menu {
+    display: none;
+    background-color: #f8f8f8;
+  }
+
+  .ui.vertical.menu .item .title .dropdown.icon {
+    float: none;
+  }
+
+  .ui.vertical.menu .item .content .item {
+    padding: 0.5em 1em;
+  }
+
+  .ui.vertical.menu .header.item {
+    text-transform: uppercase;
+  }
+
+  .ui.message {
+    background-color: rga(238, 238, 238);
+    box-shadow: none;
+    padding: 5em 4em;
+  }
+
+  .ui.message h1.ui.header {
+    font-size: 4.5em;
+  }
+
+  .ui.message p.lead {
+    font-size: 1.3em;
+    color: #333333;
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  .chart {
+    width: 100%; 
+    min-height: 450px;
+  }
+  

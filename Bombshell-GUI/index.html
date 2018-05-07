@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
+  <meta content="Visualize the impact of news on stocks" name="description" />
+  <meta content="Stocks, News, Stuff" name="keywords" />
+  <meta content="PPType" name="author" />
+  <meta content="#ffffff" name="theme-color" />
+  <title>Bombshell Stocks</title>
+
+  <link href="./static/dist/semantic-ui/semantic.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.css"
+    rel="stylesheet" type="text/css" />
+  <link href="./static/stylesheets/default.css" rel="stylesheet" type="text/css" />
+  <link href="./static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
+  <link href="./css/main.css" rel="stylesheet" type="text/css" />
+  <link href="./css/dvz-content.css" rel="stylesheet" type="text/css" />
+  <link href="./css/graph.css" rel="stylesheet" type="text/css" />
+
+  <script src="./static/dist/jquery/jquery.min.js"></script>
+  <script src="./static/dist/semantic-ui/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js"></script>
+
+  <script src="./js/drawScatterPlot.js"></script>
+  <script src="./js/nyt-service.js"></script>
+  <script src="./js/stock-service.js"></script>
+</head>
+
+<body>
+  <div class="ui grid container">
+    <div class="computer only row">
+      <div class="ui borderless huge fluid menu">
+        <a class="header item"></a>
+        <a class="active item">Home</a>
+        <a class="item">About</a>
+        <a class="item">Contact</a>
+        <div class="right menu">
+        </div>
+      </div>
+    </div>
+    <div class="tablet mobile only row">
+      <div class="ui borderless huge fluid menu">
+        <a class="header item"></a>
+        <div class="right menu">
+          <a class="menu item">
+            <div class="ui basic icon toggle button">
+              <i class="content icon"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="ui vertical accordion borderless fluid menu">
+        <a class="active item"> Home</a>
+        <a class="item"> About</a>
+        <a class="item"> Contact</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="sixteen wide column">
+        <div class="ui message">
+          <h1 class="ui huge header">
+            Bombshell Stocks
+          </h1>
+          <p class="lead">
+            Visualize the impact of current events on company share prices
+          </p>
+        </div>
+        <div class="ui stackable grid">
+          <div class="ten wide column">
+            <div class="ui segment">
+              <p>Select a news headline(s)</p>
+              <div class="ui calendar" id="example2">
+                <div class="ui fluid input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text" placeholder="Date">
+                </div>
+              </div>
+              <div id="news-items-list" class="ui relaxed divided selection list">
+                <!-- Will populate with News Items !-->
+              </div>
+              <img class="ui small image" src="./img/nytimes_150.png">
+            </div>
+          </div>
+          <div class="six wide column">
+            <div class="ui segment">
+              <p>Select a few companies to see the impact</p>
+              <div class="ui horizontal divider">Preselected Companies</div>
+              <div class="ui relaxed divided selection list">
+                <div class="item" data-content="Add users to your feed">
+                  <i class="large plus square middle aligned icon"></i>
+                  <div class="content">
+                    <a class="header">Healthcare</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="large cart middle aligned icon"></i>
+                  <div class="content">
+                    <a class="header">Consumer Goods</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="large money middle aligned icon"></i>
+                  <div class="content">
+                    <a class="header">Capital Goods</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="large laptop middle aligned icon"></i>
+                  <div class="content">
+                    <a class="header">Technology</a>
+                  </div>
+                </div>
+              </div>
+              <div class="ui horizontal divider">Individual Company</div>
+              <select id="stockselector" class="ui fluid search dropdown" multiple="">
+                <option value="">Search for a stock</option>
+                <!-- Will populate companies here -->
+              </select>
+            </div>
+            <button id="generate-button" onclick="generateGraph()" class="ui big primary button" style="float:right">Generate Graph » </button>
+          </div>
+        </div>
+        <h2 class="ui header" id="header">Impact of Events on Stocks</h2>
+
+
+        <div class="dvz-content">
+          <h4 class="chart-title">Stock Changes after News</h4>
+          <p class="chart-dek">Highest percent change within intraday share price after News</p>
+          <div id="legend-wrapper">
+            <div id="legend">
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Food"></span>Food</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Health"></span>Health</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Retail"></span>Retail</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Shipping and distribution"></span>Shipping and distribution</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Auto"></span>Auto</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Technology"></span>Tech</p>
+              </div>
+              <div class="legend-child">
+                <p class="country-name">
+                  <span class="key-dot Real estate"></span>Real estate</p>
+              </div>
+            </div>
+            <div id="legend-img">
+              <div id="key-img"></div>
+            </div>
+          </div>
+          <div id="scatterplot"></div>
+        </div>
+
+
+        <div id="chart_div" class="chart">
+
+        </div>
+      </div>
+      <script src="./js/init-templates.js" /></script>
+      <script src="./js/news-articles.js"></script>
+      <script src="./js/graph.js"></script>
+      <script src="./js/init.js"></script>
+
+
+</body>
+
+</html>
