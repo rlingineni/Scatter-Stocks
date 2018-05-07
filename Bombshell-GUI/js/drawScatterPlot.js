@@ -1,14 +1,14 @@
 function drawScatterplot(data, listOfDates, tickNames) {
 
     var dateParse = d3.timeParse("%m/%d/%y"),
-        margin = { top: 20, right: 25, bottom: 30, left: 22 },
+        margin = { top: 20, right: 25, bottom: 30, left: 100 },
         width = d3.select("#scatterplot").node().offsetWidth - margin.left - margin.right,
         height = 470 - margin.top - margin.bottom;
 
     document.querySelector("#scatterplot").innerHTML = "";
 
     d3.select('.dvz-content .tooltip').remove()
-    var tooltip = d3.select('.dvz-content').append('div')
+    var tooltip = d3.select("#tooltiparea").append('div')
         .attr("class", "dvz-tooltip tooltipWide")
 
     var svg = d3.select("#scatterplot").append("svg")
@@ -17,6 +17,7 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
     var xScale = d3.scaleTime()
         .range([0, width])
+
 
     var yScale = d3.scaleLinear()
         .range([0, height])

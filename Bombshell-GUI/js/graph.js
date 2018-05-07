@@ -8,10 +8,13 @@ async function generateGraph() {
         alert("No Articles have been selected to generate a graph");
         $("#generate-button").removeClass("loading");
         $("#generate-button").prop("disabled", false);
+        return;
     }
+
 
     $("#generate-button").addClass("loading");
     $("#generate-button").prop("disabled", true);
+    $("#chart-area").empty();
     //do selected companies exist?
 
     let companiesSelected = ["AAPL", "MSFT", "WMT"]
@@ -32,14 +35,15 @@ async function generateGraph() {
             let bubbleInfo = Object.assign({}, STOCK_MAP[symbol]);
             let publishDate = SELECTED_ARTICLES[id].pub_date;
             bubbleInfo.note = SELECTED_ARTICLES[id].headline;
+
+            let intradayChange = determineIntradayForStock(stockData, publishDate);
+
             bubbleInfo.dayChange = determineIntradayForStock(stockData, publishDate);
             bubbleInfo.eventDay = new moment(publishDate).format("YYYY-MM-DD");
             bubbleInfo.marketCapImpact = calculateImpactOnMarketCap(symbol, bubbleInfo.dayChange);
             console.log(bubbleInfo);
             listOfBubbles.push(bubbleInfo);
         }
-
-
     }
 
     LOCAL_TABLE = generateBubbleTable(listOfBubbles);
@@ -117,7 +121,7 @@ function generateYearlyQuarterStrings(listOfBubbles) {
         }
 
         listOfTicksNames.push("Jan. " + year);
-        listOfTicksNames.push("Jul. " + year);
+        listOfTicksNames.push("Jun. " + year);
     }
 
     return listOfTicksNames;
@@ -140,13 +144,13 @@ function generateYearlyQuarters(listOfBubbles) {
         if (Object.keys(listOfDates).length < 2) {
             //listOfTicks.push({ v: new Date(year, 3), f: new moment(new Date(year, 3)) });
             //listOfTicks.push({ v: new Date(year, 11), f: new moment(new Date(year, 11)) });
-            listOfTicks.push(new Date(year, 5));
+            listOfTicks.push(new Date(year, 4));
             listOfTicks.push(new Date(year, 11));
 
         }
 
         listOfTicks.push(new Date(year, 0));
-        listOfTicks.push(new Date(year, 6));
+        listOfTicks.push(new Date(year, 7));
 
         //listOfTicks.push({ v: new Date(year, 0), f: new moment(new Date(year, 0)) });
         //listOfTicks.push({ v: new Date(year, 7), f: new moment(new Date(year, 7)) });

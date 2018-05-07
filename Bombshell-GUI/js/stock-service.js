@@ -16,8 +16,7 @@ function determineIntradayForStock(stockData, date) {
     let dayAfterOpen = +stockTimeSeries[dates[2]]["1. open"];
 
     let intradayChange = getDayChanges(dayBeforeClose, dayOfOpen, dayOfClose, dayAfterOpen)
-
-
+    console.log("Change for this day is", intradayChange);
     //TO-DO:compare close of day before and open on date of News and next day Open
     return intradayChange;
 
@@ -86,11 +85,23 @@ function calculateImpactOnMarketCap(symbol, intradayChange) {
 function getDayChanges(dayBeforeClose, dayOfOpen, dayOfClose, dayAfterOpen) {
 
     let dayBeforeChange = (dayOfOpen - dayBeforeClose) / dayOfOpen;
-
-    let dayOfChange = (dayOfOpen - dayOfClose) / dayOfOpen;
+    let dayOfChange = (dayOfClose - dayOfOpen) / dayOfOpen;
     let dayAfterChange = (dayAfterOpen - dayOfClose) / dayOfClose;
 
-    return (Math.round(dayBeforeChange * 100) / 100);
+    let changes = [dayBeforeChange, dayOfChange, dayAfterChange];
+    console.log(changes);
+    let maxIntradayChangeInvert = null;
+    let maxIntradayChange = null;
+    for (let change of changes) {
+        if (!isNaN(change)) {
+            if (Math.abs(change) > maxIntradayChangeInvert || maxIntradayChange == null) {
+                maxIntradayChangeInvert = Math.abs(change);
+                maxIntradayChange = change;
+            }
+        }
+    }
+
+    return (Math.round(maxIntradayChange * 100) / 100);
 }
 
 function generateDaysToCheck(startDate) {

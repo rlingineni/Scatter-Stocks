@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "request-promise": "^4.2.2"
+    "read-data": "^1.1.0",
+    "request-promise": "^4.2.2",
+    "write-data": "^1.0.2"
   }
 }

@@ -2,15 +2,19 @@
 
 main();
 
-var STOCKS_LIST = require("./Bombshell-GUI/data/stock-info.json")
+
+
 function main() {
 
-    console.log(STOCKS_LIST);
+    var read = require('read-data').json;
+    var writeData = require('write');
+    let STOCKS_LIST = read.sync("./Bombshell-GUI/data/stock-info.json");
+
     for (let stock of STOCKS_LIST) {
         reClassifyStocks(stock);
     }
 
-    console.log(STOCKS_LIST);
+    writeData.sync("./Bombshell-GUI/data/stock-info.json", JSON.stringify(STOCKS_LIST));
 
 }
 
@@ -55,7 +59,5 @@ function reClassifyStocks(stock) {
         return;
     }
 
-    stock.sector = "Misc."
-
-
+    stock.Sector = "Misc."
 }
