@@ -1,12 +1,9 @@
 let SELECTED_ARTICLES = {};
-let SELECTED_COMPANY = null;
-let displayedArticles = [];
+let displayedArticles = []; //used as temp store to show all the displayed articles
 
 
 
 async function fetchAndPopulateHeadlines(selectedValue, endDate) {
-
-    selectedValue = selectedValue || SELECTED_COMPANY; //if no value, then use previously selected
 
     //clear existing list
     clearExistingNewsArticles();

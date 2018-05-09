@@ -13,7 +13,7 @@ let USER_SELECTED_COMPANIES = {} //used to keep track of labels that are selecte
 async function loadtemplates() {
 
     NEWS_ITEM_TEMPLATE = await $.get('components/news-item.html');
-    SELECTED_LABEL_TEMPLATE = await $.get('components/selected-company.html')
+    SELECTED_LABEL_TEMPLATE = await $.get('components/selected-label.html')
     STOCK_LIST = await $.get('data/stock-info.json');
 
 
