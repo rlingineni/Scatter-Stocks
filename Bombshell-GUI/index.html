@@ -75,25 +75,14 @@
         <div class="ui stackable grid">
           <div class="ten wide column">
             <div class="ui segment">
-              <p>Select a few news headline(s) for company</p>
 
-              <div class="ui grid">
-                <div class="twelve wide column">
+              <p>Select a few news headline(s)</p>
+              <div id="selected-articles" class="ui labels wrap-headlines">
+                <!-- Will populate with Selected Article items!-->
+              </div>
 
-                  <div id="companySearch" class="ui fluid search">
-                    <div class="ui icon fluid input">
-                      <input class="prompt" type="text" placeholder="Search companies..." style="border-radius: .28571429rem;">
-                      <i class="search icon"></i>
-                    </div>
-                    <div class="results"></div>
-                  </div>
-                </div>
-
-                <div class="four wide column">
-                  <div class="ui calendar" id="example9">
-                    <div id="calendarButton" class="ui fluid button">Today</div>
-                  </div>
-                </div>
+              <div class="ui fluid input">
+                <input id="searchevent" type="text" placeholder="Search for an event ... (e.g. Amazon buys whole foods) ">
               </div>
 
 
@@ -110,34 +99,6 @@
               <div id="selected-companies" class="ui labels">
                 <!--Selected companies and groups to compare will show up here-->
               </div>
-              <div class="ui horizontal divider">Preselected Companies</div>
-              <div class="ui relaxed divided selection list">
-                <div class="item" data-content="Add users to your feed">
-                  <i class="large plus square middle aligned icon"></i>
-                  <div class="content">
-                    <a class="header">Healthcare</a>
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="large cart middle aligned icon"></i>
-                  <div class="content">
-                    <a class="header">Consumer Goods</a>
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="large money middle aligned icon"></i>
-                  <div class="content">
-                    <a class="header">Capital Goods</a>
-                  </div>
-                </div>
-                <div class="item">
-                  <i class="large laptop middle aligned icon"></i>
-                  <div class="content">
-                    <a class="header">Technology</a>
-                  </div>
-                </div>
-              </div>
-              <div class="ui horizontal divider">Individual Company</div>
               <div id="secondaryCompanySearch" class="ui fluid search">
                 <div class="ui icon fluid input">
                   <input id="secondaryCompanySearchInput" class="prompt" type="text " placeholder="Search companies... " style="border-radius: .28571429rem;">

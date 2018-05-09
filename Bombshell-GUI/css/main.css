@@ -59,3 +59,13 @@
   height:300px;
   overflow-y: auto;
 }
+
+.wrap-headlines{
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wrap-headlines:hover{
+  overflow: auto;
+}
+

@@ -9,17 +9,6 @@ $(document).ready(function () {
     });
 
 
-    $('#companySearch')
-        .search({
-            onSelect: function (result, response) {
-                console.log("CHANGED:", result, response)
-            },
-            onSearchQuery: function (q) {
-                console.log(q)
-            }
-        });
-
-
     //google.charts.load("current", { packages: ["corechart"] });
     d3.select(window).on('resize', debounce(function () { generateGraph() }, 100))
 
@@ -28,7 +17,23 @@ $(document).ready(function () {
             on: 'hover'
         });
 
+    $("#searchevent").keyup(function (event) {
+        if (event.keyCode === 13) {
 
+            console.log("on enter")
+            console.log($("#searchevent").val())
+            let text = $("#searchevent").val();
+            if (text) {
+
+                //reset the date button
+                $("#calendarButton").html("Today")
+
+                console.log("Getting headlines for ", text)
+                fetchAndPopulateHeadlines(text);
+            }
+
+        }
+    });
 
     //DATE SELECTOR CODE
     $('#example9').calendar({

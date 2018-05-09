@@ -35,23 +35,6 @@ async function loadtemplates() {
     }
 
 
-    $("#companySearch").search({
-        source: content,
-        onSelect: function (result, response) {
-            let company = result.title;
-            if (Object.keys(SELECTED_ARTICLES).length > 0) {
-                SELECTED_ARTICLES = {} //clear selected articles
-            }
-            SELECTED_COMPANY = company;
-
-            //reset the date button
-            $("#calendarButton").html("Today")
-
-            console.log("Getting headlines for ", company)
-            fetchAndPopulateHeadlines(company);
-        }
-    })
-
     $("#secondaryCompanySearch").search({
         source: content,
         onSelect: function (result, response) {

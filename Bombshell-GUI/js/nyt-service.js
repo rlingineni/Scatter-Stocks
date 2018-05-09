@@ -39,6 +39,29 @@ function cleanCompanyName(companyName) {
 
 }
 
+async function getHeadlinesfromNYTbyQuery(query, endDate) {
+
+    let url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(query) + '&fq=' + encodeURIComponent('news_desk:("Business")')
+
+    if (endDate) {
+        url += "&endDate=" + endDate;
+    }
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        url,
+        "method": "GET",
+        "headers": {}
+    }
+
+    let headlines = await $.ajax(settings);
+
+    return headlines;
+
+}
+
+
 async function getHeadlinesfromNYTbyCompany(companyName, endDate) {
 
 
