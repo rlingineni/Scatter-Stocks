@@ -8,6 +8,18 @@ $(document).ready(function () {
         fullTextSearch: "exact"
     });
 
+
+    $('#companySearch')
+        .search({
+            onSelect: function (result, response) {
+                console.log("CHANGED:", result, response)
+            },
+            onSearchQuery: function (q) {
+                console.log(q)
+            }
+        });
+
+
     //google.charts.load("current", { packages: ["corechart"] });
     d3.select(window).on('resize', debounce(function () { generateGraph() }, 100))
 
@@ -16,11 +28,20 @@ $(document).ready(function () {
             on: 'hover'
         });
 
-    $('#example2').calendar({
+
+
+    //DATE SELECTOR CODE
+    $('#example9').calendar({
         type: 'date',
         onChange: function (date, text, mode) {
 
+            if (!SELECTED_COMPANY) {
+                console.log("No company selected")
+                return false;
+            }
+
             let selectedDate = new moment(date);
+            $("#calendarButton").html(selectedDate.format("MM/DD/YY"))
             let currentDate = new moment(Date.now());
 
             //check if date is valid
@@ -29,17 +50,19 @@ $(document).ready(function () {
                 return false;
             }
 
-            if (selectedDate.format("YYYYMMDD") === currentDate.format("YYYYMMDD")) {
-                alert("It's too soon to judge impact from today's news");
+            if (selectedDate.isAfter(currentDate)) {
+                alert("Can't get the news for day's after today");
                 return false;
             }
 
-            fetchAndPopulateHeadlines(date);
+            if (selectedDate.format("YYYYMMDD") === currentDate.format("YYYYMMDD")) {
+                $("#calendarButton").html("Today")
+            }
+            console.log("Getting headlines date around ", selectedDate.format("MM-DD-YYYY"));
+            fetchAndPopulateHeadlines(null, selectedDate.format("YYYYMMDD"));
 
         }
     });
-
-    $('#example2').calendar('set date', new moment().day(-2).toDate());
 
     function debounce(func, wait) {
         wait = wait || 0
@@ -52,6 +75,10 @@ $(document).ready(function () {
             clearTimeout(timeout)
             timeout = setTimeout(later, wait)
         }
+    }
+
+    function triggerAutoComplete(val) {
+        console.log("GOT VAL", val)
     }
 
 

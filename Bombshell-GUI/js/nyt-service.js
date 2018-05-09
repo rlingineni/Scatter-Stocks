@@ -1,4 +1,4 @@
-async function getHeadlinesfromNYT(selectedDate) {
+async function getHeadlinesfromNYTbyDate(selectedDate) {
 
     let selected = new moment(selectedDate);
 
@@ -29,3 +29,38 @@ function checkHeadlineInCache(selectedDate) {
     }
 
 }
+
+function cleanCompanyName(companyName) {
+
+    let regExp = /\(([^)]+)\)/;
+    let symbolString = regExp.exec(companyName)[0];
+    companyName = companyName.replace(symbolString, '');
+    return companyName;
+
+}
+
+async function getHeadlinesfromNYTbyCompany(companyName, endDate) {
+
+
+    companyName = cleanCompanyName(companyName);
+    let url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(companyName) + '&fq=' + encodeURIComponent('news_desk:("Business")') + '&sort=newest'
+
+    if (endDate) {
+        url += "&endDate=" + endDate;
+    }
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        url,
+        "method": "GET",
+        "headers": {}
+    }
+
+    let headlines = await $.ajax(settings);
+
+    return headlines;
+
+}
+
+

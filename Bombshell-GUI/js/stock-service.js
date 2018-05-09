@@ -4,7 +4,7 @@ function determineIntradayForStock(stockData, date) {
     let stockTimeSeries = stockData["Time Series (Daily)"];
     let dates = generateDaysToCheck(date);
 
-
+    //TO-DO: GET DAYS TO CHECK AS PER STOCK DATES
     stockTimeSeries[dates[0]] = stockTimeSeries[dates[0]] || {};
     stockTimeSeries[dates[1]] = stockTimeSeries[dates[1]] || {};
     stockTimeSeries[dates[2]] = stockTimeSeries[dates[2]] || {};

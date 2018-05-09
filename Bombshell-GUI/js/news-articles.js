@@ -1,15 +1,23 @@
 let SELECTED_ARTICLES = {};
+let SELECTED_COMPANY = null;
 let displayedArticles = [];
 
 
-async function fetchAndPopulateHeadlines(selectedDate) {
+
+async function fetchAndPopulateHeadlines(selectedValue, endDate) {
+
+    selectedValue = selectedValue || SELECTED_COMPANY; //if no value, then use previously selected
 
     //clear existing list
     clearExistingNewsArticles();
+
+    //make the container smaller
+    $("#news-items-list").removeClass("headline-container")
+
     displayMessage("Loading Articles ... ")
 
     //fetch data
-    let headlines = await getHeadlinesfromNYT(selectedDate);
+    let headlines = await getHeadlinesfromNYTbyCompany(selectedValue, endDate);
 
     //clear existing list
     clearExistingNewsArticles();
@@ -23,10 +31,6 @@ async function fetchAndPopulateHeadlines(selectedDate) {
 
     for (let doc of headlines.response.docs) {
 
-        if (id >= 5) {
-            break;
-        }
-
         //generate HTML for item
         let item = generateNewsItem(doc, id);
 
@@ -38,11 +42,12 @@ async function fetchAndPopulateHeadlines(selectedDate) {
         if (shouldHighlight(doc["_id"])) {
             $("#news-item-" + id).addClass("active");
         }
-
-
         id++;
         displayedArticles.push(doc);
     }
+
+    //resize the container and make it scrollable
+    $("#news-items-list").addClass("headline-container")
 }
 
 function displayMessage(message) {
@@ -80,8 +85,10 @@ function shouldHighlight(key) {
 
 function generateNewsItem(doc, id) {
 
+    let formattedTime = moment(doc.pub_date).format('dddd - MMM DD, YYYY');
+
     //JQUERY magic and build html object
-    var rendered = Mustache.render(NEWS_ITEM_TEMPLATE, { headline: doc.headline.main, desc: doc.snippet, id });
+    var rendered = Mustache.render(NEWS_ITEM_TEMPLATE, { headline: doc.headline.main, desc: doc.snippet, id, time: formattedTime });
     return rendered;
 
 }

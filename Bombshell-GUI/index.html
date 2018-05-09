@@ -69,19 +69,35 @@
             Bombshell Stocks
           </h1>
           <p class="lead">
-            Visualize the impact of current events on company share prices
+            Visualize the impact on how events for a company can affect industry share prices
           </p>
         </div>
         <div class="ui stackable grid">
           <div class="ten wide column">
             <div class="ui segment">
-              <p>Select a news headline(s)</p>
-              <div class="ui calendar" id="example2">
-                <div class="ui fluid input left icon">
-                  <i class="calendar icon"></i>
-                  <input type="text" placeholder="Date">
+              <p>Select a few news headline(s) for company</p>
+
+              <div class="ui grid">
+                <div class="twelve wide column">
+
+                  <div id="companySearch" class="ui fluid search">
+                    <div class="ui icon fluid input">
+                      <input class="prompt" type="text" placeholder="Search companies..." style="border-radius: .28571429rem;">
+                      <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                  </div>
+                </div>
+
+                <div class="four wide column">
+                  <div class="ui calendar" id="example9">
+                    <div id="calendarButton" class="ui fluid button">Today</div>
+                  </div>
                 </div>
               </div>
+
+
+
               <div id="news-items-list" class="ui relaxed divided selection list">
                 <!-- Will populate with News Items !-->
               </div>
@@ -91,6 +107,38 @@
           <div class="six wide column">
             <div class="ui segment">
               <p>Select a few companies to see the impact</p>
+              <div id="selected-companies" class="ui labels">
+                <div class="ui label ">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui label ">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui label">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui label">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui  label">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui  label">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+                <div class="ui  label ">
+                  Healthcare
+                  <i class="delete icon"></i>
+                </div>
+
+
+              </div>
               <div class="ui horizontal divider">Preselected Companies</div>
               <div class="ui relaxed divided selection list">
                 <div class="item" data-content="Add users to your feed">
@@ -119,10 +167,13 @@
                 </div>
               </div>
               <div class="ui horizontal divider">Individual Company</div>
-              <select id="stockselector" class="ui fluid search dropdown" multiple="">
-                <option value="">Search for a stock</option>
-                <!-- Will populate companies here -->
-              </select>
+              <div id="secondaryCompanySearch" class="ui fluid search">
+                <div class="ui icon fluid input">
+                  <input class="prompt" type="text" placeholder="Search companies..." style="border-radius: .28571429rem;" multiple="">
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
             </div>
             <button id="generate-button" onclick="generateGraph()" class="ui big primary button" style="float:right">Generate Graph » </button>
           </div>
