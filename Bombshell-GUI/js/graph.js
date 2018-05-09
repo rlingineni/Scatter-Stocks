@@ -14,7 +14,7 @@ async function generateGraph() {
 
     $("#generate-button").addClass("loading");
     $("#generate-button").prop("disabled", true);
-    $("#chart-area").empty();
+    $("#scatterplot").empty();
     //do selected companies exist?
 
     let companiesSelected = ["AAPL", "MSFT", "WMT"]

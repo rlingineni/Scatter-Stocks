@@ -108,36 +108,7 @@
             <div class="ui segment">
               <p>Select a few companies to see the impact</p>
               <div id="selected-companies" class="ui labels">
-                <div class="ui label ">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui label ">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui label">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui label">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui  label">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui  label">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-                <div class="ui  label ">
-                  Healthcare
-                  <i class="delete icon"></i>
-                </div>
-
-
+                <!--Selected companies and groups to compare will show up here-->
               </div>
               <div class="ui horizontal divider">Preselected Companies</div>
               <div class="ui relaxed divided selection list">
@@ -169,58 +140,58 @@
               <div class="ui horizontal divider">Individual Company</div>
               <div id="secondaryCompanySearch" class="ui fluid search">
                 <div class="ui icon fluid input">
-                  <input class="prompt" type="text" placeholder="Search companies..." style="border-radius: .28571429rem;" multiple="">
-                  <i class="search icon"></i>
+                  <input id="secondaryCompanySearchInput" class="prompt" type="text " placeholder="Search companies... " style="border-radius: .28571429rem;">
+                  <i class="search icon "></i>
                 </div>
-                <div class="results"></div>
+                <div class="results "></div>
               </div>
             </div>
-            <button id="generate-button" onclick="generateGraph()" class="ui big primary button" style="float:right">Generate Graph » </button>
+            <button id="generate-button " onclick="generateGraph() " class="ui big primary button " style="float:right ">Generate Graph » </button>
           </div>
         </div>
 
 
-        <section class="container-width gfx-bump">
-          <div class="dvz-content border-box">
-            <h3 class="chart-title">Stock Changes after News</h3>
-            <p class="chart-dek">Highest percent change within intraday share price after News</p>
-            <div id="legend-wrapper">
-              <div id="legend">
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Food"></span>Food</p>
+        <section class="container-width gfx-bump ">
+          <div class="dvz-content border-box ">
+            <h3 class="chart-title ">Stock Changes after News</h3>
+            <p class="chart-dek ">Highest percent change within intraday share price after News</p>
+            <div id="legend-wrapper ">
+              <div id="legend ">
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Food "></span>Food</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Health"></span>Health</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Health "></span>Health</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Retail"></span>Retail</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Retail "></span>Retail</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Shipping and distribution"></span>Shipping and distribution</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Shipping and distribution "></span>Shipping and distribution</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Auto"></span>Auto</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Auto "></span>Auto</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Tech"></span>Tech</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Tech "></span>Tech</p>
                 </div>
-                <div class="legend-child">
-                  <p class="country-name">
-                    <span class="key-dot Real estate"></span>Real estate</p>
+                <div class="legend-child ">
+                  <p class="country-name ">
+                    <span class="key-dot Real estate "></span>Real estate</p>
                 </div>
               </div>
-              <div id="legend-img">
-                <div id="key-img"></div>
+              <div id="legend-img ">
+                <div id="key-img "></div>
               </div>
             </div>
-            <div id="scatterplot"></div>
-            <div id="tooltiparea">
+            <div id="scatterplot "></div>
+            <div id="tooltiparea ">
 
             </div>
           </div>
@@ -228,13 +199,13 @@
 
 
 
-        <div id="chart_div" class="chart">
+        <div id="chart_div " class="chart ">
         </div>
       </div>
-      <script src="./js/init-templates.js" /></script>
-      <script src="./js/news-articles.js"></script>
-      <script src="./js/graph.js"></script>
-      <script src="./js/init.js"></script>
+      <script src="./js/init-templates.js " /></script>
+      <script src="./js/news-articles.js "></script>
+      <script src="./js/graph.js "></script>
+      <script src="./js/init.js "></script>
 
 
 </body>

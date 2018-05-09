@@ -54,3 +54,8 @@
     border-radius: .28571429rem;
     border: 1px solid rgba(34,36,38,.15);
 }
+
+.headline-container{
+  height:300px;
+  overflow-y: auto;
+}
