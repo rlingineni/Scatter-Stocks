@@ -3,6 +3,8 @@ let LOCAL_LISTOFTICKS = [];
 
 async function generateGraph() {
 
+    let companiesSelected = USER_SELECTED_COMPANIES;
+
     //check if news Articles have been selected
     if (Object.keys(SELECTED_ARTICLES).length == 0) {
         alert("No Articles have been selected to generate a graph");
@@ -11,24 +13,24 @@ async function generateGraph() {
         return;
     }
 
+    if (Object.keys(USER_SELECTED_COMPANIES).length == 0) {
+        alert("No companies have been selected to graph");
+        $("#generate-button").removeClass("loading");
+        $("#generate-button").prop("disabled", false);
+        return;
+    }
 
     $("#generate-button").addClass("loading");
     $("#generate-button").prop("disabled", true);
     $("#scatterplot").empty();
-    //do selected companies exist?
-
-    let companiesSelected = ["AAPL", "MSFT", "WMT"]
 
     let listOfBubbles = [];
 
-
     //TO-DO: perform in parallel
 
-
     //foreach company selected
-    for (let symbol of companiesSelected) {
+    for (let symbol of Object.keys(companiesSelected)) {
         let stockData = await getStocksForSymbol(symbol);
-
 
         //for every article day lookup dates
         for (let id in SELECTED_ARTICLES) {

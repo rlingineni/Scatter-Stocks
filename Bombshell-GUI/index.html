@@ -75,22 +75,18 @@
         <div class="ui stackable grid">
           <div class="ten wide column">
             <div class="ui segment">
-
               <p>Select a few news headline(s)</p>
               <div id="selected-articles" class="ui labels wrap-headlines">
                 <!-- Will populate with Selected Article items!-->
               </div>
-
               <div class="ui fluid input">
                 <input id="searchevent" type="text" placeholder="Search for an event ... (e.g. Amazon buys whole foods) ">
               </div>
-
-
-
               <div id="news-items-list" class="ui relaxed divided selection list">
                 <!-- Will populate with News Items !-->
               </div>
-              <img class="ui small image" src="./img/nytimes_150.png">
+              <a style="margin-bottom:1px" href="#">Add my own event ...</a>
+              <img class="ui small image" style="margin-top:10px" src="./img/nytimes_150.png">
             </div>
           </div>
           <div class="six wide column">
@@ -107,7 +103,7 @@
                 <div class="results "></div>
               </div>
             </div>
-            <button id="generate-button " onclick="generateGraph() " class="ui big primary button " style="float:right ">Generate Graph » </button>
+            <button id="generate-button" onclick="generateGraph() " class="ui big primary button " style="float:right ">Generate Graph » </button>
           </div>
         </div>
 
