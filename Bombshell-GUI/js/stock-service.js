@@ -101,6 +101,8 @@ function getDayChanges(dayBeforeClose, dayOfOpen, dayOfClose, dayAfterOpen) {
         }
     }
 
+    maxIntradayChange *= 100; //multiply by hundred to normalize percent
+
     return (Math.round(maxIntradayChange * 100) / 100);
 }
 

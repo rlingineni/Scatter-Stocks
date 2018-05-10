@@ -36,7 +36,7 @@ async function generateGraph() {
         for (let id in SELECTED_ARTICLES) {
             let bubbleInfo = Object.assign({}, STOCK_MAP[symbol]);
             let publishDate = SELECTED_ARTICLES[id].pub_date;
-            bubbleInfo.note = SELECTED_ARTICLES[id].headline;
+            bubbleInfo.note = SELECTED_ARTICLES[id].headline.main;
 
             let intradayChange = determineIntradayForStock(stockData, publishDate);
 
@@ -59,6 +59,8 @@ async function generateGraph() {
     $("#generate-button").prop("disabled", false);
 
     drawScatterplot(scatterPlotData, LOCAL_LISTOFTICKS, tickNames);
+
+    console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
     //drawChart();
 }
 

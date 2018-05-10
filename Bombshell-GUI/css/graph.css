@@ -104,14 +104,6 @@
   .line-Auto {
       stroke: #dca0ff;
   }
-  .Tech {
-      fill: #767676;
-      /*stroke: #767676;*/
-    background-color: #767676;
-  }
-  .line-Tech {
-      stroke: #767676;
-  }
   .Retail {
       fill: #ffff00;
       /*stroke: #ffff00;*/
@@ -141,10 +133,19 @@
   /*	stroke: #fa1e64;*/
     background-color: #fa1e64;
   }
-  .Shipping.and.distribution {
+  .Misc {
+    fill:#FF8C00;
+    background-color: #FF8C00
+  }
+  .line-Misc{
+    stroke:#FF8C00;
+  }
+  .Tech {
     background-color: #81dfbf;
     fill: #81dfbf;
-  /*  stroke: #81dfbf;*/
+  }
+  .line-Tech{
+    stroke:#81dfbf
   }
   div.tooltipSmall {      
     width: 135px;                  

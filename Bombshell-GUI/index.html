@@ -85,7 +85,23 @@
               <div id="news-items-list" class="ui relaxed divided selection list">
                 <!-- Will populate with News Items !-->
               </div>
-              <a style="margin-bottom:1px" href="#">Add my own event ...</a>
+              <a style="margin-left:1px" href="#" onclick="return displayDatePicker()">Add my own event ...</a>
+              <div id="addManualArticleView" class="ui segment" style="display: none;">
+                <h4 class="ui header">Manually add event</h4>
+                <div class="ui fluid input">
+                  <input type="text" id="articleInput" placeholder="My own headline or event (e.g company X went down)">
+                </div>
+                <div style="margin-top:5px">
+                  <div class="ui calendar" id="calendarButton" style="display:inline-block;">
+                    <div id="calendarDisplay" class="ui button">5/10/2018</div>
+                  </div>
+                  <button class="ui primary button" onclick="addManualArticle()">Add</button>
+                </div>
+
+
+              </div>
+
+
               <img class="ui small image" style="margin-top:10px" src="./img/nytimes_150.png">
             </div>
           </div>
@@ -128,10 +144,6 @@
                 </div>
                 <div class="legend-child">
                   <p class="country-name">
-                    <span class="key-dot Shipping and distribution"></span>Shipping and distribution</p>
-                </div>
-                <div class="legend-child">
-                  <p class="country-name">
                     <span class="key-dot Auto"></span>Auto</p>
                 </div>
                 <div class="legend-child">
@@ -141,6 +153,10 @@
                 <div class="legend-child">
                   <p class="country-name">
                     <span class="key-dot Real estate"></span>Real estate</p>
+                </div>
+                <div class="legend-child">
+                  <p class="country-name">
+                    <span class="key-dot Misc"></span>Misc</p>
                 </div>
               </div>
               <div id="legend-img">
