@@ -89,7 +89,7 @@ function generateShareableLink() {
         symbols.push(symbol)
     }
 
-    history.pushState('Generate Graph', 'Bombshell Stocks', 'http://localhost:8000/?symbols=' + symbols + '&events=' + articleKey);
+    history.pushState('Generate Graph', 'Bombshell Stocks', '/?symbols=' + symbols + '&events=' + articleKey);
 
 }
 
