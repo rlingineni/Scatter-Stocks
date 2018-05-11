@@ -5,7 +5,7 @@ async function getHeadlinesfromNYTbyDate(selectedDate) {
     let startDate = selected.format("YYYYMMDD");
     let endDate = selected.add(1, 'days').format("YYYYMMDD");
     console.log("checking days from ", startDate, endDate);
-    let url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk:("Business")&begin_date=' + startDate + '&end_date=' + endDate + '&api-key=da7478038493428aad87be41ba7009fc'
+    let url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk:("Business")&begin_date=' + startDate + '&end_date=' + endDate + '&api-key=da7478038493428aad87be41ba7009fc'
 
     var settings = {
         "async": true,
@@ -41,7 +41,7 @@ function cleanCompanyName(companyName) {
 
 async function getHeadlinesfromNYTbyQuery(query, endDate) {
 
-    let url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(query) + '&fq=' + encodeURIComponent('news_desk:("Business")')
+    let url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(query) + '&fq=' + encodeURIComponent('news_desk:("Business")')
 
     if (endDate) {
         url += "&endDate=" + endDate;
@@ -66,7 +66,7 @@ async function getHeadlinesfromNYTbyCompany(companyName, endDate) {
 
 
     companyName = cleanCompanyName(companyName);
-    let url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(companyName) + '&fq=' + encodeURIComponent('news_desk:("Business")') + '&sort=newest'
+    let url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=da7478038493428aad87be41ba7009fc&q=' + encodeURIComponent(companyName) + '&fq=' + encodeURIComponent('news_desk:("Business")') + '&sort=newest'
 
     if (endDate) {
         url += "&endDate=" + endDate;
