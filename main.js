@@ -54,7 +54,7 @@ function reClassifyStocks(stock) {
     }
 
     //Tech
-    if (sector.includes("Technology")) {
+    if (industry[0].includes("Computer")) {
         stock.Sector = "Tech"
         return;
     }
