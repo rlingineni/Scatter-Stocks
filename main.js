@@ -59,5 +59,5 @@ function reClassifyStocks(stock) {
         return;
     }
 
-    stock.Sector = "Misc."
+    stock.Sector = "Misc"
 }
