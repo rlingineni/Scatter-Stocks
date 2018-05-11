@@ -4,7 +4,6 @@
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 $(document).ready(function () {
-    $('.ui.accordion').accordion();
 
     //google.charts.load("current", { packages: ["corechart"] });
     d3.select(window).on('resize', debounce(function () { generateGraph() }, 100))

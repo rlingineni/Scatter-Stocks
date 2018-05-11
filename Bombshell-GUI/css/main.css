@@ -1,5 +1,6 @@
 .ui.borderless.huge.menu {
     background-color: #f8f8f8;
+    padding-top: 10px
   }
 
   .ui.borderless.huge.menu .header.item {
@@ -26,7 +27,7 @@
   .ui.message {
     background-color: rga(238, 238, 238);
     box-shadow: none;
-    padding: 5em 4em;
+    padding: 4em 1.2em;
   }
 
   .ui.message h1.ui.header {

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
+    <meta content="Visualize the impact of news on stocks" name="description" />
+    <meta content="Stocks, News, Stuff" name="keywords" />
+    <meta content="Raviteja Lingineni" name="author" />
+    <meta content="#ffffff" name="theme-color" />
+    <title>About</title>
+
+    <link href="./static/dist/semantic-ui/semantic.min.css" rel="stylesheet" type="text/css" />
+    <link href="./static/stylesheets/pandoc-code-highlight.css" rel="stylesheet" type="text/css" />
+    <link href="./css/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div class="ui grid container">
+
+        <div class="ui borderless huge fluid menu">
+            <a class="header item"></a>
+            <a href="/index.html" class="item">Home</a>
+            <a href="/about.html" class="active item">About</a>
+        </div>
+
+        <div class="sixteen wide column">
+            <h3>Thanks for stopping by! </h3>
+            <p>Bombshell Stocks was inspired by a
+                <a href="#">Bloomberg</a> article on how companies kept getting "Amazoned". To be Amazoned means to have your business
+                crushed because the company got into your industry.</p>
+            <p>Embedded within their article was a graph called
+                <a href="#">Bezos Bombshells</a>. It was a great visualization that displayed how different shares rose and fell based
+                on news from Amazon. For example, when Amazon accquired Whole Foods, stocks of Walmart and Kroger dipped.
+                The graph was a great visual aid to understand why stocks may rise or fall. However, I wasn't satisfied with
+                a graph just about Amazon. I wanted to see similar graphs for many different companies.
+            </p>
+            <p>
+                I was determined to see how I could recreate a so called "Bombshell" graph for any company based on a series of events. If
+                you run the example on the homepage, you can see how stocks of Apple and it's competition changed as per
+                news events.
+            </p>
+            <h4>How the data works: </h4>
+            <p>I tried reaching out to the author of the Bloomberg article to understand how she got her data. I didn't get
+                a response. However, I did manage to piece the information together myself and find alterative data sources
+                in the open:</p>
+
+            <p>
+                The
+                <b> stock symbols </b> information is compiled from a static CSV that details Stock Symbol Names, Industries
+                and Market Cap from Nasdaq. I converted this to JSON and reclassified the companies by simpler types. I'll
+                have to manually update this once in a while for new IPOs. You can find the JSON file in the repo under the
+                data folder.
+            </p>
+            <p>
+                The
+                <b> percent change </b> data is obtained by calculating highest intraday differences, so it looks at the day
+                of an event (or the closest day the market was open to that event) and compares with the day after's open
+                price, and the day before's close price to get the maximum intraday difference. My stock data is pulled from
+                Alphavantage.
+            </p>
+            <p>
+                The
+                <b> impact on Market Cap </b> was an interesting calculation. It assesses how the percent change of a share impacts
+                the company as a whole. It's found by dividing the percent change value with the company's Market Cap value
+                (usally reported quarterly)
+            </p>
+            <h4>Further Comments, Questions and Concerns</h4>
+            <p>I wrote a more detailed
+                <a href=#>blog</a> post if you are interested </p>
+
+            <p>If you are having problems or running into bugs, open a
+                <a href="#">issue</a> on Github.
+            </p>
+
+            <p>MIT License.</p>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

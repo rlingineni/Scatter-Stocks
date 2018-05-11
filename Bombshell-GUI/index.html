@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no" name="viewport" />
   <meta content="Visualize the impact of news on stocks" name="description" />
   <meta content="Stocks, News, Stuff" name="keywords" />
-  <meta content="PPType" name="author" />
+  <meta content="Raviteja Lingineni" name="author" />
   <meta content="#ffffff" name="theme-color" />
   <title>Bombshell Stocks</title>
 
@@ -35,33 +35,14 @@
 
 <body>
   <div class="ui grid container">
-    <div class="computer only row">
-      <div class="ui borderless huge fluid menu">
-        <a class="header item"></a>
-        <a class="active item">Home</a>
-        <a class="item">About</a>
-        <a class="item">Contact</a>
-        <div class="right menu">
-        </div>
-      </div>
+
+    <div class="ui borderless huge fluid menu">
+      <a class="header item"></a>
+      <a href="/index.html" class="active item">Home</a>
+      <a href="/about.html" class="item">About</a>
     </div>
-    <div class="tablet mobile only row">
-      <div class="ui borderless huge fluid menu">
-        <a class="header item"></a>
-        <div class="right menu">
-          <a class="menu item">
-            <div class="ui basic icon toggle button">
-              <i class="content icon"></i>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="ui vertical accordion borderless fluid menu">
-        <a class="active item"> Home</a>
-        <a class="item"> About</a>
-        <a class="item"> Contact</a>
-      </div>
-    </div>
+
+
     <div class="row">
       <div class="sixteen wide column">
         <div class="ui message">
@@ -69,8 +50,10 @@
             Bombshell Stocks
           </h1>
           <p class="lead">
-            Visualize the impact on how events for a company can affect industry share prices
+            Visualize the impact of events on a company's share price
           </p>
+          <a href="/?symbols=TSLA&events=VGVzbGEgSXMgU3RpbGwgQnVybmluZyBDYXNoLCBidXQgRWxvbiBNdXNrIFNlZXMgYSBUdXJuaW5nIFBvaW50LTA1LzAyLzIwMThAIUB0ZXN0IGZvciB0b2RheS0wNS8xMS8yMDE4QCFA"
+            class="ui button">View Example</a>
         </div>
         <div class="ui stackable grid">
           <div class="ten wide column">
@@ -97,8 +80,6 @@
                   </div>
                   <button class="ui primary button" onclick="addManualArticle()">Add</button>
                 </div>
-
-
               </div>
 
 
@@ -124,10 +105,10 @@
         </div>
 
 
-        <section class="container-width gfx-bump">
-          <div id="chart-details" class="dvz-content border-box" style="display: none;">
+        <section class="container-width gfx-bump" id="chart-details" style="display: none;">
+          <div class="dvz-content border-box">
             <h3 class="chart-title">Stock Changes after News</h3>
-            <p class="chart-dek">Highest percent change within intraday share price after News</p>
+            <p class="chart-dek" style="margin-top:5px;">Highest percent change within intraday share price after News</p>
             <div id="legend-wrapper">
               <div id="legend">
                 <div class="legend-child">
@@ -164,12 +145,12 @@
               </div>
             </div>
 
-
             <div id="scatterplot"></div>
             <div id="tooltiparea">
 
             </div>
           </div>
+          <a href="https://www.bloomberg.com/graphics/2018-amazon-industry-displacement/#legend-wrapper">View the original Bezos Bombshells Graph</a>
         </section>
 
 

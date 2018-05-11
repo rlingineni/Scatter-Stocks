@@ -673,7 +673,7 @@
     font-family: 'BWHaasText', sans-serif;
     font-weight: 700;
     font-size: 1.125rem;
-    margin: 10px 0 0 0
+    margin: 5px 0 0 0
 }
 
 .dvz-content a,
@@ -1135,7 +1135,6 @@ div.dvz-tooltip .dvz-tt-num {
     font-weight: 400;
     font-size: 1.75rem;
     line-height: 2.0625rem;
-    margin: 20px 0 0 0 !important;
     color: #000
 }
 
