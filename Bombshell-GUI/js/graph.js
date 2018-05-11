@@ -38,19 +38,16 @@ async function generateGraph() {
             let publishDate = SELECTED_ARTICLES[id].pub_date;
             bubbleInfo.note = SELECTED_ARTICLES[id].headline.main;
 
-            let intradayChange = determineIntradayForStock(stockData, publishDate);
-
             bubbleInfo.dayChange = determineIntradayForStock(stockData, publishDate);
-            bubbleInfo.eventDay = new moment(publishDate).format("YYYY-MM-DD");
+            bubbleInfo.eventDay = new moment(publishDate).format("MM/DD/YY");
             bubbleInfo.marketCapImpact = calculateImpactOnMarketCap(symbol, bubbleInfo.dayChange);
-            console.log(bubbleInfo);
             listOfBubbles.push(bubbleInfo);
         }
     }
 
     LOCAL_TABLE = generateBubbleTable(listOfBubbles);
-    LOCAL_LISTOFTICKS = generateYearlyQuarters(listOfBubbles);
-    let tickNames = generateYearlyQuarterStrings(listOfBubbles);
+    let listOfTicks = generateYearlyQuarters(listOfBubbles); //actual tick values
+    let tickNames = generateYearlyQuarterStrings(listOfBubbles); //tick string mappings
     let scatterPlotData = generateScatterPlotData(listOfBubbles);
 
 
@@ -58,20 +55,41 @@ async function generateGraph() {
     $("#generate-button").removeClass("loading");
     $("#generate-button").prop("disabled", false);
 
-    drawScatterplot(scatterPlotData, LOCAL_LISTOFTICKS, tickNames);
+    drawScatterplot(scatterPlotData, listOfTicks, tickNames);
 
     console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
+    generateShareableLink();
     //drawChart();
 }
 
 
+function generateShareableLink() {
+    console.log("Updating the URL")
+
+    let articleString = ''
+    for (let key of Object.keys(SELECTED_ARTICLES)) {
+        let article = SELECTED_ARTICLES[key]
+        let identifier = article.headline.main + "-" + moment(article.pub_date).format("MM/DD/YYYY");
+        articleString += identifier + "@!@"
+    }
+
+    let articleKey = btoa(articleString);
+
+    let symbols = [];
+    for (let symbol of Object.keys(USER_SELECTED_COMPANIES)) {
+        symbols.push(symbol)
+    }
+
+    history.pushState('Generate Graph', 'Bombshell Stocks', 'http://localhost:8000/?symbols=' + symbols + '&events=' + articleKey);
+
+}
 
 function generateScatterPlotData(listOfBubbles) {
 
     let data = []
     for (let bubble of listOfBubbles) {
         let bubbleValue = {
-            date: new moment(bubble.eventDay, "YYYY-MM-DD").format("MM/DD/YY"),
+            date: bubble.eventDay,
             company: bubble.Name,
             industry: bubble.Sector,
             priceChangePercent: bubble.dayChange,
@@ -84,9 +102,6 @@ function generateScatterPlotData(listOfBubbles) {
     return data;
 
 }
-
-
-
 
 function generateBubbleTable(listOfBubbles) {
 
@@ -112,14 +127,14 @@ function generateYearlyQuarterStrings(listOfBubbles) {
     let listOfTicksNames = []
     console.log(listOfBubbles);
     for (let bubble of listOfBubbles) {
-        listOfDates[new moment(bubble.eventDay, "YYYY-MM-DD").year()] = {};
+        listOfDates[new moment(bubble.eventDay, "MM/DD/YY").year()] = {};
     }
 
 
     for (let year in listOfDates) {
 
         if (Object.keys(listOfDates).length < 2) {
-            listOfTicksNames.push("Apr. " + year);
+            listOfTicksNames.push("Mar. " + year);
             listOfTicksNames.push("Oct. " + year);
 
         }
@@ -127,6 +142,7 @@ function generateYearlyQuarterStrings(listOfBubbles) {
         listOfTicksNames.push("Jan. " + year);
         listOfTicksNames.push("Jun. " + year);
     }
+
 
     return listOfTicksNames;
 
@@ -139,7 +155,7 @@ function generateYearlyQuarters(listOfBubbles) {
     let listOfTicks = []
     console.log(listOfBubbles);
     for (let bubble of listOfBubbles) {
-        listOfDates[new moment(bubble.eventDay, "YYYY-MM-DD").year()] = {};
+        listOfDates[new moment(bubble.eventDay, "MM/DD/YY").year()] = {};
     }
 
 

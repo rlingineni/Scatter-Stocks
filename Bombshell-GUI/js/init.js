@@ -1,6 +1,8 @@
 /**
  * Initialize UI Components and Pre-Load Components
  */
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 $(document).ready(function () {
     $('.ui.accordion').accordion();
 
@@ -52,7 +54,10 @@ $(document).ready(function () {
             timeout = setTimeout(later, wait)
         }
     }
+
+
 });
+
 
 
 function displayDatePicker() {
@@ -62,7 +67,6 @@ function displayDatePicker() {
 function addManualArticle() {
     let headline = $("#articleInput").val();
     let publishDate = $("#calendarButton").calendar("get date")
-    publishDate = new moment(publishDate).format("MM/DD/YY");
     let key = new Date().getTime();
     if (!headline) {
         alert("You can't leave the headline empty!")
@@ -71,15 +75,30 @@ function addManualArticle() {
 
     //Mimic an Actual Article from the API
     SELECTED_ARTICLES[key] = {
+        isManual: true,
         headline: {
             main: headline
         },
         pub_date: publishDate
     };
+
+    generateAndAddArticle(key, headline, publishDate)
+    $("#addManualArticleView").hide();
+}
+
+function generateAndAddArticle(key, headline, publishDate) {
+    //Mimic an Actual Article from the API
+    SELECTED_ARTICLES[key] = {
+        isManual: true,
+        headline: {
+            main: headline
+        },
+        pub_date: publishDate
+    };
+    publishDate = new moment(publishDate).format("MM/DD/YY");
     let item = Mustache.render(SELECTED_LABEL_TEMPLATE, { id: key, labelName: headline + " - " + publishDate });
     $("#selected-articles").prepend(item)
     $("#delete-label-" + key).click(onDeleteSelectedArticle)
-    $("#addManualArticleView").hide();
 }
 
 
