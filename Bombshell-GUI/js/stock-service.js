@@ -2,8 +2,15 @@
 function determineIntradayForStock(stockData, date) {
 
     let stockTimeSeries = stockData["Time Series (Daily)"];
-    let dates = generateDaysToCheck(date);
+    let stockTimeStamps = Object.keys(stockTimeSeries);
 
+    let dates = generateDaysToCheck(date, stockTimeStamps, 0);
+
+    console.log(dates);
+
+    if (dates == null) {
+        return null;
+    }
     //TO-DO: GET DAYS TO CHECK AS PER STOCK DATES
     stockTimeSeries[dates[0]] = stockTimeSeries[dates[0]] || {};
     stockTimeSeries[dates[1]] = stockTimeSeries[dates[1]] || {};
@@ -106,16 +113,29 @@ function getDayChanges(dayBeforeClose, dayOfOpen, dayOfClose, dayAfterOpen) {
     return (Math.round(maxIntradayChange * 100) / 100);
 }
 
-function generateDaysToCheck(startDate) {
+function generateDaysToCheck(startDate, stockTimeStamps, numDaysApart) {
+    console.log(numDaysApart);
+    //if can't find valid range after 10 days, return null
+    if (numDaysApart > 10) {
+        return null;
+    }
 
-    let selected = new moment(startDate);
+    let currentDay = new moment(startDate);
+    let currentDayString = currentDay.format("YYYY-MM-DD");
 
-    let dayOf = selected.format("YYYY-MM-DD");
-    let dayBefore = selected.clone().subtract(1, 'days').format("YYYY-MM-DD");
-    let dayAfter = selected.clone().add(1, 'days').format("YYYY-MM-DD");
+    let indexOfDay = stockTimeStamps.indexOf(currentDayString);
+    if (indexOfDay != -1) {
+        let dayOf = stockTimeStamps[indexOfDay]
+        let dayBefore = stockTimeStamps[indexOfDay + 1]
+        let dayAfter = stockTimeStamps[indexOfDay - 1]
+        let daysToCheck = [dayBefore, dayOf, dayAfter]
+        return daysToCheck;
+    }
+    //find the closest next timestamp to the selected article
+    let nextDay = currentDay.clone().add(1, 'days');
+    return generateDaysToCheck(nextDay, stockTimeStamps, numDaysApart + 1);
 
-    let daysToCheck = [dayBefore, dayOf, dayAfter]
-    return daysToCheck;
+
 }
 
 

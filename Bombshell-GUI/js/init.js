@@ -28,15 +28,15 @@ $(document).ready(function () {
     $("#calendarButton").calendar({
         type: "date",
         onChange: function (date, text, mode) {
-
             let selectedDate = new moment(date);
-            $("#calendarDisplay").html(selectedDate.format("MM/DD/YY"))
             let currentDate = new moment(Date.now());
 
             if (selectedDate.isAfter(currentDate)) {
                 alert("Whoa Nelly, you can't create an event in the future");
                 return false;
             }
+
+            $("#calendarDisplay").html(selectedDate.format("MM/DD/YY"))
         }
     });
 
@@ -72,16 +72,6 @@ function addManualArticle() {
         alert("You can't leave the headline empty!")
         return;
     }
-
-    //Mimic an Actual Article from the API
-    SELECTED_ARTICLES[key] = {
-        isManual: true,
-        headline: {
-            main: headline
-        },
-        pub_date: publishDate
-    };
-
     generateAndAddArticle(key, headline, publishDate)
     $("#addManualArticleView").hide();
 }
