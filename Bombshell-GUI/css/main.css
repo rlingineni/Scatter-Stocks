@@ -66,7 +66,7 @@
   white-space: nowrap;
 }
 
-.wrap-headlines:hover{
+.wrap-headlines:hover .wrap-headlines:active{
   overflow: auto;
 }
 
