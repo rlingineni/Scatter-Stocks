@@ -82,6 +82,7 @@ function generateShareableLink() {
         articleString += identifier + "@!@"
     }
 
+    articleString = articleString.replace(/[\u0250-\ue007]/g, '');
     let articleKey = btoa(articleString);
 
     let symbols = [];

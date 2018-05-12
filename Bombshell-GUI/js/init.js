@@ -6,7 +6,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 $(document).ready(function () {
 
     //google.charts.load("current", { packages: ["corechart"] });
-    d3.select(window).on('resize', debounce(function () { generateGraph() }, 100))
+    d3.select(window).on('resize', debounce(function () { /**generateGraph()**/ }, 100))
 
     $("#searchevent").keyup(function (event) {
         if (event.keyCode === 13) {
