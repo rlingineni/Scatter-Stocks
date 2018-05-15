@@ -28,7 +28,7 @@
   <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js"></script>
 
   <script src="./static/dist/Base64/base64.js"></script>
-  <script src="./js/drawScatterPlot.js"></script>
+  <script src="./js/renderGraph.js"></script>
   <script src="./js/nyt-service.js"></script>
   <script src="./js/stock-service.js"></script>
 </head>
@@ -106,10 +106,12 @@
         <div id="graphErrorMessage" class="ui error message" style="display: none;">
           Unable to create graph, see console for detailed output or try regenerating . . .
         </div>
-        <section class="container-width gfx-bump" id="chart-details" style="display: none;">
-          <div class="dvz-content border-box">
-            <h3 class="chart-title">Stock Changes after News</h3>
-            <p class="chart-dek" style="margin-top:5px;">Highest percent change within intraday share price after News</p>
+        <section id="chart-details" style="display: none;">
+          <div class="border-box">
+            <h1>Stock Changes after News</h1>
+            <h3 style="margin-top:5px;font-weight: normal;">Graph depicts highest percent change 24 hours after news. The bubble size represents the impact on the company's
+              <a href="https://www.investopedia.com/terms/m/marketcapitalization.asp">market cap</a>
+            </h3>
             <div id="legend-wrapper">
               <div id="legend">
                 <div class="legend-child">
@@ -140,9 +142,6 @@
                   <p class="country-name">
                     <span class="key-dot Misc"></span>Misc</p>
                 </div>
-              </div>
-              <div id="legend-img">
-                <div id="key-img"></div>
               </div>
             </div>
             <div id="scatterplot">

@@ -7,9 +7,9 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
     document.querySelector("#scatterplot").innerHTML = "";
 
-    d3.select('.dvz-content .tooltip').remove()
+
     var tooltip = d3.select("#tooltiparea").append('div')
-        .attr("class", "dvz-tooltip tooltipWide")
+        .attr("class", "tooltip tooltipWide")
 
     var svg = d3.select("#scatterplot").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -30,8 +30,6 @@ function drawScatterplot(data, listOfDates, tickNames) {
         d.marketCapDecrease = +d.marketCapDecrease;
     })
 
-    //if I plot the biggest d00ds first and the smaller d00ds after that, then it's easier to
-    //tooltip over the small d00ds when the two overlap
     data.sort(function (a, b) {
         return b.marketCapDecrease - a.marketCapDecrease
     })
@@ -55,29 +53,26 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
 
 
+
     svg.append("g")
         .attr("class", "y-axis axis")
         .attr("transform", "translate(" + (margin.left + width) + "," + margin.top + ")")
         .call(d3.axisRight(yScale)
             .ticks(6))
 
+
     var labelFontSize = 14
 
     var ticks = svg.selectAll('.y-axis .tick')
         .attr('data-top-tick', 'false')
 
-    //This is what topTick should normally look like
     var bottomTick = ticks._groups[0][ticks.size() - 1];
 
-    //This is bespoke topTick for the reversed axis
     var topTick = ticks._groups[0][0];
     topTick.setAttribute('data-top-tick', 'true');
 
-    //leaving this line in here even though I don't have a prefix
     var topTickText = d3.select(topTick).select('text').node()
 
-
-    // tickWidth based on width of rendered text in top tick
     var topTickWidth = topTickText.getBoundingClientRect().width;
 
     var bottomTickWidth = bottomTick.getBoundingClientRect().width;
@@ -87,7 +82,6 @@ function drawScatterplot(data, listOfDates, tickNames) {
     var tickX1 = tickX;
     var tickX2 = topTickWidth;
 
-    // Make the ticks the correct width - took this out bc ticks go across whole graphic
     ticks.select('line')
         .attr('x1', (-width + -margin.left))
         .attr('x2', (0 + (topTickWidth)))
@@ -138,9 +132,9 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
 
 
-    var tooltipOffset = { x: 5, y: -25 }
-    var tooltipLeft = { x: 45, y: -25 }
-    var tooltipRight = { x: -45, y: -25 }
+    var tooltipOffset = { x: 50, y: -70 }
+    var tooltipLeft = { x: 70, y: -25 }
+    var tooltipRight = { x: -70, y: -25 }
 
     var tooltipDateFormat = d3.timeFormat("%b. %-d")
 
@@ -166,7 +160,7 @@ function drawScatterplot(data, listOfDates, tickNames) {
             .style('stroke', '#000')
             .style('stroke-opacity', 1)
         tooltip.style('display', 'block')
-            .html("<span>" + d.company + "</span> <br/>" + d.priceChangePercent + "% intraday share price change on " + properAbvMonth(tooltipDateFormat(dateParse(d.date))) + " after " + d.note)
+            .html("<span>" + d.company + "</span> <br/>" + d.priceChangePercent + "% intraday share price change on " + properAbvMonth(tooltipDateFormat(dateParse(d.date))) + " after: " + '<b>' + d.note + '</b>')
     }
 
     // Move the tooltip to track the mouse

@@ -11,7 +11,6 @@
       fill: #efefef;
   }
   .axis text {
-      font-family: BWHaasText,HaasText,helvetica,arial,sans-serif;
     font-size: 14px;
   }
   .annotation path{
@@ -38,6 +37,7 @@
     flex-direction: row;
     width: 100%;
   }
+
   #legend {
     display: flex;
     flex-direction: row;
@@ -47,7 +47,6 @@
     align-content: flex-end;
     margin-top: 5px;
   }
- 
   .legend-child {
     margin-right: 20px;
     align-self: flex-end;
@@ -59,25 +58,6 @@
   .legend-scatter-dot {
     stroke: black;
     fill: white;
-  }
-    #key-img {
-      width: 147px;
-      height: 88px;
-      margin-top: -60px;
-      background-image: url("../../img/size-key-01.png");
-    }
-  @media all and (max-width:  725px) { 
-    #key-img {
-       margin-top: 0px;
-    }
-  }
-  @media all and (max-width:  500px) { 
-    #key-img {
-     width: 124px;
-     height: 66px;
-     margin-top: 0px;
-      background-image: url("../../img/size-key-02.png");
-    }
   }
   .dot {
       fill-opacity: .6;
@@ -153,76 +133,28 @@
   div.tooltipWide {      
     width: 180px;                  
   } 
-  div.dvz-tooltip {   
+  .tooltip {   
     position: absolute;  
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 2px 2px #ccc;
     color: black;       
-    text-align: left;
-    font-family: BWHaasText, Helvetica, sans-serif;                       
-    min-height: inherit;                  
-    padding: 2px;             
-    font-size: 14px;
-    line-height: 16px;         
+    text-align: left;        
+    min-height: inherit;                          
+    font-size: 14px; 
     pointer-events: none; 
     z-index: 9999; 
     display: none;
-    padding: 5px;
+    padding: 7px;
     transform: translate(-50%, -110%);
   } 
-  div.dvz-tooltip span{ 
+  .tooltip span{ 
     font-weight: bold;
    } 
-  
   @media all and (max-width:  500px) { 
     div.tooltipWide {
        width: 140px;             
     }
-  }
-  /*@media all and (max-width: 550px) {
-    div.tooltip { 
-       width: 100px;   
-       font-size: 12px;
-       line-height: 14px;   
-    }
-  }
-  div.tooltip:after, before {
-        position: absolute;
-        bottom: 0;
-        border: solid transparent;
-        left: 50%;
-        content: ' ';
-        display: inline-block;
-        width: 0;
-        background-color: transparent;
-        height: 0;
-        pointer-events: none;
-        z-index: 100;
-        transform: translate(-50%, 100%);
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-top: 7px solid #fff;
-      }
-    div.tooltip:after {
-      border-color: rgba(255, 255, 255, 0);
-      border-top-color: #fff;
-      border-width: 7px;
-      margin-left: -7px;
-    }
-    div.tooltip:before {
-      border-color: rgba(102, 102, 102, 0);
-      border-width: 8px;
-      margin-left: -8px;*/
-  /*      border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid #ccc;   */
-    
-  
-  #slope-charts{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
   }
   .small-chart {
       width: 40%;

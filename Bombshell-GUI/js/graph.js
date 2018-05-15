@@ -116,6 +116,7 @@ function generateScatterPlotData(listOfBubbles) {
     let data = []
     for (let bubble of listOfBubbles) {
         let bubbleValue = {
+            MarketCap: bubble.MarketCap,
             date: bubble.eventDay,
             company: bubble.Name,
             industry: bubble.Sector,
