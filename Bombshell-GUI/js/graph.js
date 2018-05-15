@@ -24,50 +24,68 @@ async function generateGraph() {
     $("#generate-button").prop("disabled", true);
     $("#chart-details").hide();
     $("#scatterplot").empty();
+    $('#graphErrorMessage').hide();
 
-    let listOfBubbles = [];
 
-    //TO-DO: perform in parallel
+    try {
+        let listOfBubbles = [];
+        let allStockRequests = [];
 
-    //foreach company selected
-    for (let symbol of Object.keys(companiesSelected)) {
-        let stockData = await getStocksForSymbol(symbol);
+        //foreach company selected make a web request
+        for (let symbol of Object.keys(companiesSelected)) {
+            allStockRequests.push(getStocksForSymbol(symbol));
+        }
 
-        //for every article day lookup dates
-        for (let id in SELECTED_ARTICLES) {
-            let bubbleInfo = Object.assign({}, STOCK_MAP[symbol]);
-            let publishDate = SELECTED_ARTICLES[id].pub_date;
-            bubbleInfo.note = SELECTED_ARTICLES[id].headline.main;
+        //TO-DO: Add error message on fail
+        let stockResults = await Promise.all(allStockRequests); //perform request in parrallel
 
-            let dayChange = determineIntradayForStock(stockData, publishDate);
-            let publishDateFormatted = new moment(publishDate).format("MM/DD/YY");
-            if (!dayChange) {
-                //push an error
-                alert("Unable to generate bubble for " + symbol + " on " + publishDateFormatted)
-            } else {
-                bubbleInfo.dayChange = determineIntradayForStock(stockData, publishDate);
-                bubbleInfo.eventDay = publishDateFormatted;
-                bubbleInfo.marketCapImpact = calculateImpactOnMarketCap(symbol, bubbleInfo.dayChange);
-                listOfBubbles.push(bubbleInfo);
+        for (let stockData of stockResults) {
+            let symbol = stockData['Meta Data']['2. Symbol'];
+            console.log(stockData)
+            console.log(symbol);
+            //for every article day lookup dates
+            for (let id in SELECTED_ARTICLES) {
+                let bubbleInfo = Object.assign({}, STOCK_MAP[symbol]);
+                let publishDate = SELECTED_ARTICLES[id].pub_date;
+                bubbleInfo.note = SELECTED_ARTICLES[id].headline.main;
+
+                let dayChange = determineIntradayForStock(stockData, publishDate);
+                let publishDateFormatted = new moment(publishDate).format("MM/DD/YY");
+                if (!dayChange) {
+                    //push an error
+                    alert("Unable to generate bubble for " + symbol + " on " + publishDateFormatted)
+                } else {
+                    bubbleInfo.dayChange = determineIntradayForStock(stockData, publishDate);
+                    bubbleInfo.eventDay = publishDateFormatted;
+                    bubbleInfo.marketCapImpact = calculateImpactOnMarketCap(symbol, bubbleInfo.dayChange);
+                    listOfBubbles.push(bubbleInfo);
+                }
             }
         }
+
+        LOCAL_TABLE = generateBubbleTable(listOfBubbles);
+        let listOfTicks = generateYearlyQuarters(listOfBubbles); //actual tick values
+        let tickNames = generateYearlyQuarterStrings(listOfBubbles); //tick string mappings
+        let scatterPlotData = generateScatterPlotData(listOfBubbles);
+
+        drawScatterplot(scatterPlotData, listOfTicks, tickNames);
+
+        console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
+        generateShareableLink();
+        $("#chart-details").show();
+
+    } catch (ex) {
+        console.error(ex);
+        $('#graphErrorMessage').show();
     }
-
-    LOCAL_TABLE = generateBubbleTable(listOfBubbles);
-    let listOfTicks = generateYearlyQuarters(listOfBubbles); //actual tick values
-    let tickNames = generateYearlyQuarterStrings(listOfBubbles); //tick string mappings
-    let scatterPlotData = generateScatterPlotData(listOfBubbles);
-
 
 
     $("#generate-button").removeClass("loading");
     $("#generate-button").prop("disabled", false);
-    $("#chart-details").show();
 
-    drawScatterplot(scatterPlotData, listOfTicks, tickNames);
 
-    console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
-    generateShareableLink();
+
+
     //drawChart();
 }
 

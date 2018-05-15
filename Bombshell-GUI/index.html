@@ -103,8 +103,9 @@
             <button id="generate-button" onclick="generateGraph() " class="ui big primary button " style="float:right ">Generate Graph » </button>
           </div>
         </div>
-
-
+        <div id="graphErrorMessage" class="ui error message" style="display: none;">
+          Unable to create graph, see console for detailed output or try regenerating . . .
+        </div>
         <section class="container-width gfx-bump" id="chart-details" style="display: none;">
           <div class="dvz-content border-box">
             <h3 class="chart-title">Stock Changes after News</h3>
@@ -144,10 +145,9 @@
                 <div id="key-img"></div>
               </div>
             </div>
-
-            <div id="scatterplot"></div>
+            <div id="scatterplot">
+            </div>
             <div id="tooltiparea">
-
             </div>
           </div>
           <a href="https://www.bloomberg.com/graphics/2018-amazon-industry-displacement/#legend-wrapper">View the original Bezos Bombshells Graph</a>

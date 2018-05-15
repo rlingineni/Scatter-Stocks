@@ -1,7 +1,6 @@
 /**
  * Initialize UI Components and Pre-Load Components
  */
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 $(document).ready(function () {
 
