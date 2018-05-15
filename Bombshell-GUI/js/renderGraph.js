@@ -159,7 +159,7 @@ function drawScatterplot(data, listOfDates, tickNames) {
             .style('stroke', '#000')
             .style('stroke-opacity', 1)
         tooltip.style('display', 'block')
-            .html("<span>" + d.company + "</span> <br/>" + d.priceChangePercent + "% intraday share price change on " + properAbvMonth(tooltipDateFormat(dateParse(d.date))) + " after: " + '<b>' + d.note + '</b>')
+            .html("<span>" + d.company + "</span> <br/>" + d.priceChangePercent + "% intraday share price change on " + properAbvMonth(tooltipDateFormat(dateParse(d.date))) + " after " + d.note)
     }
 
     // Move the tooltip to track the mouse
