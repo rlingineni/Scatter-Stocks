@@ -71,7 +71,7 @@ function parseURLAndGenerateValues() {
 }
 
 function parseAndAddHeadlinesFromURL(eventsKey) {
-    let eventHeadlines = atob(eventsKey);
+    let eventHeadlines = Base64.decode(eventsKey)
     let newsArticles = eventHeadlines.split("@!@")
 
     for (let numArticle = 0; numArticle < newsArticles.length - 1; numArticle++) {

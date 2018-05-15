@@ -54,6 +54,7 @@ function drawScatterplot(data, listOfDates, tickNames) {
             }))
 
 
+
     svg.append("g")
         .attr("class", "y-axis axis")
         .attr("transform", "translate(" + (margin.left + width) + "," + margin.top + ")")
