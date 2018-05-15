@@ -131,9 +131,9 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
 
 
-    var tooltipOffset = { x: 50, y: -70 }
-    var tooltipLeft = { x: 70, y: -25 }
-    var tooltipRight = { x: -70, y: -25 }
+    var tooltipOffset = { x: 5, y: -25 }
+    var tooltipLeft = { x: 45, y: -25 }
+    var tooltipRight = { x: -45, y: -25 }
 
     var tooltipDateFormat = d3.timeFormat("%b. %-d")
 
