@@ -67,12 +67,12 @@ async function generateGraph() {
         let listOfTicks = generateYearlyQuarters(listOfBubbles); //actual tick values
         let tickNames = generateYearlyQuarterStrings(listOfBubbles); //tick string mappings
         let scatterPlotData = generateScatterPlotData(listOfBubbles);
-
+        $("#chart-details").show();
         drawScatterplot(scatterPlotData, listOfTicks, tickNames);
 
         console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
         generateShareableLink();
-        $("#chart-details").show();
+
 
     } catch (ex) {
         console.error(ex);
