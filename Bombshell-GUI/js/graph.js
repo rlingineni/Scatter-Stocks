@@ -36,13 +36,12 @@ async function generateGraph() {
             allStockRequests.push(getStocksForSymbol(symbol));
         }
 
+        console.log("Making request for all Stock Data");
         //TO-DO: Add error message on fail
         let stockResults = await Promise.all(allStockRequests); //perform request in parrallel
-
+        console.log("Recieved Stock Data");
         for (let stockData of stockResults) {
             let symbol = stockData['Meta Data']['2. Symbol'];
-            console.log(stockData)
-            console.log(symbol);
             //for every article day lookup dates
             for (let id in SELECTED_ARTICLES) {
                 let bubbleInfo = Object.assign({}, STOCK_MAP[symbol]);
@@ -68,11 +67,9 @@ async function generateGraph() {
         let tickNames = generateYearlyQuarterStrings(listOfBubbles); //tick string mappings
         let scatterPlotData = generateScatterPlotData(listOfBubbles);
         $("#chart-details").show();
+        console.log("Plotting Data on graph . . .");
         drawScatterplot(scatterPlotData, listOfTicks, tickNames);
-
-        console.log("RECREATE WITH:", SELECTED_ARTICLES, USER_SELECTED_COMPANIES)
         generateShareableLink();
-
 
     } catch (ex) {
         console.error(ex);
@@ -82,16 +79,11 @@ async function generateGraph() {
 
     $("#generate-button").removeClass("loading");
     $("#generate-button").prop("disabled", false);
-
-
-
-
-    //drawChart();
 }
 
 
 function generateShareableLink() {
-    console.log("Updating the URL")
+    console.log("Updating the URL ... ")
 
     let articleString = ''
     for (let key of Object.keys(SELECTED_ARTICLES)) {
@@ -153,7 +145,6 @@ function generateBubbleTable(listOfBubbles) {
 function generateYearlyQuarterStrings(listOfBubbles) {
     let listOfDates = {};
     let listOfTicksNames = []
-    console.log(listOfBubbles);
     for (let bubble of listOfBubbles) {
         listOfDates[new moment(bubble.eventDay, "MM/DD/YY").year()] = {};
     }
@@ -181,7 +172,6 @@ function generateYearlyQuarters(listOfBubbles) {
 
     let listOfDates = {};
     let listOfTicks = []
-    console.log(listOfBubbles);
     for (let bubble of listOfBubbles) {
         listOfDates[new moment(bubble.eventDay, "MM/DD/YY").year()] = {};
     }
@@ -190,22 +180,14 @@ function generateYearlyQuarters(listOfBubbles) {
     for (let year in listOfDates) {
 
         if (Object.keys(listOfDates).length < 2) {
-            //listOfTicks.push({ v: new Date(year, 3), f: new moment(new Date(year, 3)) });
-            //listOfTicks.push({ v: new Date(year, 11), f: new moment(new Date(year, 11)) });
             listOfTicks.push(new Date(year, 2));
             listOfTicks.push(new Date(year, 9));
-
         }
 
         listOfTicks.push(new Date(year, 0));
         listOfTicks.push(new Date(year, 5));
-
-        //listOfTicks.push({ v: new Date(year, 0), f: new moment(new Date(year, 0)) });
-        //listOfTicks.push({ v: new Date(year, 7), f: new moment(new Date(year, 7)) });
     }
-    console.log(listOfTicks);
     return listOfTicks;
-
 }
 
 function drawChart() {

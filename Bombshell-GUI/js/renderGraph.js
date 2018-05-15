@@ -118,7 +118,6 @@ function drawScatterplot(data, listOfDates, tickNames) {
 
     dotGroup.append("circle")
         .attr("r", function (d) {
-            console.log("tryna  use  ", d.marketCapDecrease)
             if (width > 500) {
 
                 return Math.sqrt(Math.abs(radius(d.marketCapDecrease)))
