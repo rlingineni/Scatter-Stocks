@@ -14,7 +14,14 @@ async function fetchAndPopulateHeadlines(selectedValue, endDate) {
     displayMessage("Loading Articles ... ")
 
     //fetch data
-    let headlines = await getHeadlinesfromNYTbyQuery(selectedValue, endDate);
+    let headlines = {}
+
+    try {
+        headlines = await getHeadlinesfromNYTbyQuery(selectedValue, endDate);
+    } catch (ex) {
+        displayMessage("Err. Couldn't load articles. See Console for detailed output")
+        console.error(ex);
+    }
 
     //clear existing list
     clearExistingNewsArticles();
