@@ -99,7 +99,7 @@ function generateShareableLink() {
         symbols.push(symbol)
     }
     console.log("URL Extension: ", 'index.html?symbols=' + symbols + '&events=' + articleKey);
-    history.pushState('Generate Graph', 'Bombshell Stocks', 'https://www.heyraviteja.com/Scatter-Stocks/Bombshell-GUI/index.html?symbols=' + symbols + '&events=' + articleKey);
+    history.pushState('Generate Graph', 'Bombshell Stocks', '?symbols=' + symbols + '&events=' + articleKey);
 
 }
 
