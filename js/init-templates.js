@@ -42,6 +42,9 @@ async function loadtemplates() {
             let stock = STOCK_LIST[result.id];
             //add to selected labels
             generateAndAddStockLabel(stock.Symbol);
+            $("#secondaryCompanySearch").search("set value", "")
+            $("#secondaryCompanySearch").search("query")
+            return false;
         }
     })
 
