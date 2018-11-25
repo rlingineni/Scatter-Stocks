@@ -29,7 +29,7 @@ function determineIntradayForStock(stockData, date) {
  * @param {string} symbol 
  */
 async function getStocksForSymbol(symbol) {
-    let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + symbol + "&outputsize=full&apikey=DNS540LAHORLFHB5"
+    let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + symbol + "&outputsize=full&apikey="+getRandomAlphaVantageToken();
 
     var settings = {
         "async": true,
@@ -63,6 +63,26 @@ function parseMarketCap(marketCapString) {
 
     return null;
 }
+
+function getRandomAlphaVantageToken(){
+
+   //Alphavantage only allows 5 calls per minute. For the sake of the HN Rush, let's use mutliple tokens.
+   let keys = [
+       "DNS540LAHORLFHB5",
+       "EKKG90HQKAUWW0ID",
+       "HPA70NGRDL1B43HN",
+       "3SXE47CYBANMFW3Z",
+       "KMH77JTJGNLGLYG0",
+       "SKNQDM2CMMDTDVV1"
+       ];
+    
+   let token = keys[Math.floor(Math.random()*keys.length)];
+   
+   return token;
+   
+}
+
+
 
 function calculateImpactOnMarketCap(symbol, intradayChange) {
 
