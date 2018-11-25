@@ -29,7 +29,7 @@ function determineIntradayForStock(stockData, date) {
  * @param {string} symbol 
  */
 async function getStocksForSymbol(symbol) {
-    let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + symbol + "&outputsize=full&apikey=EKKG90HQKAUWW0ID"
+    let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + symbol + "&outputsize=full&apikey=DNS540LAHORLFHB5"
 
     var settings = {
         "async": true,
