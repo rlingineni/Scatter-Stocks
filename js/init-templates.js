@@ -1,5 +1,3 @@
-loadtemplates();
-
 let NEWS_ITEM_TEMPLATE = "";
 let SELECTED_LABEL_TEMPLATE = "";
 let STOCK_LIST = []
@@ -9,6 +7,7 @@ let TEMPLATES_READY = false; //Observe Value to get templates status
 let USER_SELECTED_COMPANIES = {} //used to keep track of labels that are selected
 
 
+loadtemplates();
 
 async function loadtemplates() {
 
